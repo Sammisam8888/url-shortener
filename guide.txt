@@ -1,0 +1,18 @@
+
+## Free Hosting
+### Render (Recommended)
+1. Go to [Render](https://render.com/)
+2. Click "New Web Service"
+3. Select "Python" and connect your GitHub repository
+4. Use the following command to run:
+   ```bash
+   gunicorn app:app
+   ```
+5. Deploy and get your live URL.
+
+### Replit
+1. Go to [Replit](https://replit.com/)
+2. Create a new Python project
+3. Upload your `app.py`, `templates/`, and `static/`
+4. Run `flask run --host=0.0.0.0`
+5. Get your public URL.

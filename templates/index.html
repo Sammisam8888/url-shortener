@@ -1,21 +1,48 @@
+<!-- filepath: /home/sammisam8888/Desktop/url-shortener/templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Shortener</title>
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <title>SnapURL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h2>Simple URL Shortener</h2>
-    <form id="shorten-form">
-        <input type="url" id="original_url" name="original_url" placeholder="Enter URL" required>
-        <button type="submit">Generate URL</button>
-    </form>
-    <br>
-    <div id="result" style="display: none;">
-        <input type="text" id="short-url" readonly>
-        <button onclick="copyToClipboard()">Copy</button>
+    <div class="container">
+        <h2 class="title"><span class="mini">Snap</span>URL</h2>
+        
+        <div class="welcome-box">
+            <h3 class="welcome">Hola, <br>Welcome to <span class="mini">SnapURL</span></h3>
+            <div class="features">
+                <div>✅ Easy to create instantly</div>
+                <div>✅ Share it quickly</div>
+                <div>✅ Get History of Links</div>
+            </div>
+        </div>
+
+        <form method="POST" action="/">
+            <label for="full-link">Your Link</label>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <input type="text" id="full-link" name="original_url" placeholder="Enter your link" required style="flex: 1;">
+                <button type="submit" class="btn" style="position: relative; top: -5px;">Shorten It</button>
+            </div>
+        </form>
+
+        {% if short_url %}
+            <label for="short-link">Your Shortened Link</label>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <input type="text" id="short-link" value="{{ short_url }}" readonly style="flex: 1;">
+                <button type="button" class="btn copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('short-link').value).then(() => alert('Short URL copied to clipboard!')).catch(() => alert('Failed to copy URL.'))" style="position: relative; top: -5px;">Copy</button>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <button class="history-btn" onclick="window.location.href='/'">Liked it? Generate a new one</button>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -52,7 +52,7 @@ def index():
             error = "Invalid URL format. Please provide a valid URL."
         else:
             # Check if the URL already exists in the database
-            existing_entry = URL.query.filter_by(original_url=original_url).first()
+            existing_entry = URL.query.filter_by(original_url=original_url).first() #if no data is present in database for the corresponding original url then it returns None - False
             if existing_entry:
                 short_url = request.host_url + existing_entry.short_url
             else:
@@ -69,7 +69,7 @@ def index():
 
     return render_template("index.html", title="SnapURL", short_url=short_url, error=error)
 
-@app.route("/<short_url>")
+@app.route("/<short_url>",methods=["GET"])
 def redirect_to_original(short_url):
     entry = URL.query.filter_by(short_url=short_url).first()
     if entry:
@@ -80,4 +80,4 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     # app.run(debug=True) # use while production
-    app.run(host="0.0.0.0", port=10000) #use while deployment
+    # app.run(host="0.0.0.0", port=10000) #use while deployment

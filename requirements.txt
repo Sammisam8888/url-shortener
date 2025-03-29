@@ -1,4 +1,15 @@
+blinker==1.9.0
+click==8.1.8
+decorator==5.2.1
 Flask==2.3.2
 Flask-SQLAlchemy==3.0.5
+greenlet==3.1.1
+gunicorn==23.0.0
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+packaging==24.2
+SQLAlchemy==2.0.39
+typing_extensions==4.12.2
 validators==0.20.0
-gunicorn
+Werkzeug==3.1.3
